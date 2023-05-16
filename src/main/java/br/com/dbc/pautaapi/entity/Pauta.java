@@ -1,7 +1,6 @@
-package br.com.dbc.pautaapi;
+package br.com.dbc.pautaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

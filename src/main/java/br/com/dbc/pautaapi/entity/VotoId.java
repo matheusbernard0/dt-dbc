@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi;
+package br.com.dbc.pautaapi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

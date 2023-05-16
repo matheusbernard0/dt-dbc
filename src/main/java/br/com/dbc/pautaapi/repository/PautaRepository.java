@@ -1,6 +1,6 @@
-package br.com.dbc.pautaapi.repositories;
+package br.com.dbc.pautaapi.repository;
 
-import br.com.dbc.pautaapi.Pauta;
+import br.com.dbc.pautaapi.entity.Pauta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

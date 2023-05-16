@@ -1,5 +1,6 @@
-package br.com.dbc.pautaapi;
+package br.com.dbc.pautaapi.dto.request;
 
+import br.com.dbc.pautaapi.entity.Opcao;
 import lombok.Data;
 
 @Data

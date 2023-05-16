@@ -1,6 +1,6 @@
-package br.com.dbc.pautaapi.repositories;
+package br.com.dbc.pautaapi.repository;
 
-import br.com.dbc.pautaapi.Sessao;
+import br.com.dbc.pautaapi.entity.Sessao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
