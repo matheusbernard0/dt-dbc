@@ -1,7 +1,10 @@
 package br.com.dbc.pautaapi.resource.impl;
 
+import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
 import br.com.dbc.pautaapi.entity.Pauta;
+import br.com.dbc.pautaapi.mapper.PautaMapper;
 import br.com.dbc.pautaapi.repository.PautaRepository;
+import br.com.dbc.pautaapi.dto.response.CriaPautaResponse;
 import br.com.dbc.pautaapi.resource.PautaResource;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,8 @@ public class PautaResourceImpl implements PautaResource {
     }
 
     @Override
-    public Pauta create(Pauta pauta) {
-        return pautaRepository.save(pauta);
+    public CriaPautaResponse create(CriaPautaRequest criaPautaRequest) {
+        Pauta pauta = PautaMapper.INSTANCE.criaPautaRequestToPauta(criaPautaRequest);
+        return PautaMapper.INSTANCE.pautaToCriaPautaResponse(pautaRepository.save(pauta));
     }
 }

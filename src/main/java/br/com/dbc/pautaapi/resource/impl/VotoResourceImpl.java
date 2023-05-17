@@ -1,7 +1,9 @@
 package br.com.dbc.pautaapi.resource.impl;
 
-import br.com.dbc.pautaapi.dto.request.VotaRequest;
+import br.com.dbc.pautaapi.dto.request.SalvaVotoRequest;
+import br.com.dbc.pautaapi.dto.response.SalvaVotoResponse;
 import br.com.dbc.pautaapi.entity.*;
+import br.com.dbc.pautaapi.mapper.VotoMapper;
 import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.repository.UsuarioRepository;
 import br.com.dbc.pautaapi.repository.VotoRepository;
@@ -19,8 +21,8 @@ public class VotoResourceImpl implements VotoResource {
     private final VotoRepository votoRepository;
 
     @Override
-    public void salvaVoto(VotaRequest votaRequest) {
-        Pauta pauta = pautaRepository.findById(votaRequest.getPautaId())
+    public SalvaVotoResponse salvaVoto(SalvaVotoRequest salvaVotoRequest) {
+        Pauta pauta = pautaRepository.findById(salvaVotoRequest.getPautaId())
                 .orElseThrow(() -> new RuntimeException("Pauta nao encontrada"));
 
         Sessao sessao = pauta.getSessao();
@@ -30,7 +32,7 @@ public class VotoResourceImpl implements VotoResource {
         if (!sessao.estaAbertaParaVotacao())
             throw new RuntimeException("A sessao de votacao esta encerrada");
 
-        Usuario usuario = usuarioRepository.findById(votaRequest.getUsuarioId())
+        Usuario usuario = usuarioRepository.findById(salvaVotoRequest.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
 
         votoRepository.findById(new VotoId(sessao.getId(), usuario.getId()))
@@ -38,10 +40,10 @@ public class VotoResourceImpl implements VotoResource {
                     throw new RuntimeException("Voto ja realizado para usuario e pauta informada");
                 });
 
-        Voto voto = new Voto();
+        Voto voto = VotoMapper.INSTANCE.salvaVotoRequestToVoto(salvaVotoRequest);
         voto.setUsuario(usuario);
         voto.setSessao(sessao);
-        voto.setOpcao(votaRequest.getOpcao());
-        votoRepository.save(voto);
+
+        return VotoMapper.INSTANCE.votoToSalvaVotoResponse(votoRepository.save(voto), new SalvaVotoResponse());
     }
 }

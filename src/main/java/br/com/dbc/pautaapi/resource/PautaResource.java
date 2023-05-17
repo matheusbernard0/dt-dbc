@@ -1,5 +1,7 @@
 package br.com.dbc.pautaapi.resource;
 
+import br.com.dbc.pautaapi.dto.response.CriaPautaResponse;
+import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
 import br.com.dbc.pautaapi.entity.Pauta;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,5 +16,5 @@ public interface PautaResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Pauta create(@RequestBody Pauta pauta);
+    CriaPautaResponse create(@RequestBody CriaPautaRequest criaPautaRequest);
 }
