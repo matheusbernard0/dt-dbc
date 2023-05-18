@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.CriaUsuarioRequest;
 import br.com.dbc.pautaapi.dto.response.CriaUsuarioResponse;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "Usuario", description = "Operacoes relativas a Usuario")
-@RequestMapping("/usuario")
+@RequestMapping("/usuario/v1")
 public interface UsuarioResource {
 
     @ApiOperation(value = "Cria um usuario")

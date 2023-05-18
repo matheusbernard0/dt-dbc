@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.CriaSessaoRequest;
 import br.com.dbc.pautaapi.dto.response.CriaSessaoResponse;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Api(tags = "Sessao", description = "Operacoes relativas a Sessao")
-@RequestMapping("/sessao")
+@RequestMapping("/sessao/v1")
 public interface SessaoResource {
 
     @ApiOperation(value = "Cria a sessao para uma pauta")

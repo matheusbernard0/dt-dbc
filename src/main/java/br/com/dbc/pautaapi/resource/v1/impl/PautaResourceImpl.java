@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource.impl;
+package br.com.dbc.pautaapi.resource.v1.impl;
 
 import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
 import br.com.dbc.pautaapi.dto.response.ResultadoPautaResponse;
@@ -10,7 +10,7 @@ import br.com.dbc.pautaapi.exception.PautaNaoEncontradaException;
 import br.com.dbc.pautaapi.mapper.PautaMapper;
 import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.dto.response.CriaPautaResponse;
-import br.com.dbc.pautaapi.resource.PautaResource;
+import br.com.dbc.pautaapi.resource.v1.PautaResource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource.impl;
+package br.com.dbc.pautaapi.resource.v1.impl;
 
 import br.com.dbc.pautaapi.dto.request.CriaSessaoRequest;
 import br.com.dbc.pautaapi.dto.response.CriaSessaoResponse;
@@ -9,7 +9,7 @@ import br.com.dbc.pautaapi.exception.SessaoJaIniciadaException;
 import br.com.dbc.pautaapi.mapper.SessaoMapper;
 import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.repository.SessaoRepository;
-import br.com.dbc.pautaapi.resource.SessaoResource;
+import br.com.dbc.pautaapi.resource.v1.SessaoResource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

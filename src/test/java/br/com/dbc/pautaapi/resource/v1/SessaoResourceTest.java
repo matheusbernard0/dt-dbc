@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.CriaSessaoRequest;
 import br.com.dbc.pautaapi.entity.Pauta;
@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = SessaoResource.class)
 public class SessaoResourceTest {
+    private static final String SESSAO_V1_BASE_PATH = "/sessao/v1";
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -47,7 +48,7 @@ public class SessaoResourceTest {
         CriaSessaoRequest request = Fixture.from(CriaSessaoRequest.class).gimme("VALID");
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.empty());
 
-        mvc.perform(patch("/sessao/inicia/1" )
+        mvc.perform(patch(SESSAO_V1_BASE_PATH + "/inicia/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isNotFound())
@@ -61,7 +62,7 @@ public class SessaoResourceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("PAUTA_EM_VOTACAO");
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(patch("/sessao/inicia/1" )
+        mvc.perform(patch(SESSAO_V1_BASE_PATH + "/inicia/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -78,7 +79,7 @@ public class SessaoResourceTest {
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
         when(sessaoRepository.save(any(Sessao.class))).thenReturn(sessao);
 
-        mvc.perform(patch("/sessao/inicia/1" )
+        mvc.perform(patch(SESSAO_V1_BASE_PATH + "/inicia/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -96,7 +97,7 @@ public class SessaoResourceTest {
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
         when(sessaoRepository.save(any(Sessao.class))).thenReturn(sessao);
 
-        mvc.perform(patch("/sessao/inicia/1" )
+        mvc.perform(patch(SESSAO_V1_BASE_PATH + "/inicia/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))

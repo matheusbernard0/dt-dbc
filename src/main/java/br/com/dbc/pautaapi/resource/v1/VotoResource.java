@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 
 import br.com.dbc.pautaapi.dto.request.SalvaVotoRequest;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Api(tags = "Voto", description = "Operacoes relativas a Voto")
-@RequestMapping("/voto")
+@RequestMapping("/voto/v1")
 public interface VotoResource {
 
 

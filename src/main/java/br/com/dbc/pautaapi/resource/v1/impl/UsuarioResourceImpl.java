@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource.impl;
+package br.com.dbc.pautaapi.resource.v1.impl;
 
 import br.com.dbc.pautaapi.dto.request.CriaUsuarioRequest;
 import br.com.dbc.pautaapi.dto.response.CriaUsuarioResponse;
@@ -6,7 +6,7 @@ import br.com.dbc.pautaapi.entity.Usuario;
 import br.com.dbc.pautaapi.exception.UsuarioJaCadastradoException;
 import br.com.dbc.pautaapi.mapper.UsuarioMapper;
 import br.com.dbc.pautaapi.repository.UsuarioRepository;
-import br.com.dbc.pautaapi.resource.UsuarioResource;
+import br.com.dbc.pautaapi.resource.v1.UsuarioResource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,8 +1,9 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
 import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.repository.PautaRepository;
+import br.com.dbc.pautaapi.resource.v1.PautaResource;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = PautaResource.class)
 public class PautaResouceTest {
+    private static final String PAUTA_V1_BASE_PATH = "/pauta/v1";
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -42,7 +44,7 @@ public class PautaResouceTest {
     @Test
     public void findAllMustReturnAnEmptyList() throws Exception {
         when(pautaRepository.findAll()).thenReturn(Collections.emptyList());
-        mvc.perform(get("/pauta")
+        mvc.perform(get(PAUTA_V1_BASE_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -54,7 +56,7 @@ public class PautaResouceTest {
         List<Pauta> list = Fixture.from(Pauta.class).gimme(1,"VALID");
         when(pautaRepository.findAll()).thenReturn(list);
 
-        mvc.perform(get("/pauta")
+        mvc.perform(get(PAUTA_V1_BASE_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
@@ -70,7 +72,7 @@ public class PautaResouceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("VALID");
         when(pautaRepository.save(any(Pauta.class))).thenReturn(pauta);
 
-        mvc.perform(post("/pauta")
+        mvc.perform(post(PAUTA_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
@@ -84,7 +86,7 @@ public class PautaResouceTest {
     public void getResultMustThrowPautNaoEncontradaException() throws Exception {
         when(pautaRepository.getPautaWithVotos(any(Integer.class))).thenReturn(Optional.empty());
 
-        mvc.perform(get("/pauta/{pautaId}", "1")
+        mvc.perform(get(PAUTA_V1_BASE_PATH+"/{pautaId}", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$").value("pauta nao encontrada"));
@@ -97,7 +99,7 @@ public class PautaResouceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("VALID");
         when(pautaRepository.getPautaWithVotos(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(get("/pauta/{pautaId}", "1")
+        mvc.perform(get(PAUTA_V1_BASE_PATH+"/{pautaId}", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").value("pauta ainda nao possui uma sessao"));
@@ -110,7 +112,7 @@ public class PautaResouceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("PAUTA_EM_VOTACAO");
         when(pautaRepository.getPautaWithVotos(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(get("/pauta/{pautaId}", "1")
+        mvc.perform(get(PAUTA_V1_BASE_PATH+"/{pautaId}", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").value("pauta ainda esta aberta para votacao"));
@@ -123,7 +125,7 @@ public class PautaResouceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("PAUTA_COM_UM_VOTO_NAO");
         when(pautaRepository.getPautaWithVotos(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(get("/pauta/{pautaId}", "1")
+        mvc.perform(get(PAUTA_V1_BASE_PATH+"/{pautaId}", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pauta_id").value(1))

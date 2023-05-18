@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource.impl;
+package br.com.dbc.pautaapi.resource.v1.impl;
 
 import br.com.dbc.pautaapi.dto.request.SalvaVotoRequest;
 import br.com.dbc.pautaapi.dto.response.SalvaVotoResponse;
@@ -8,7 +8,7 @@ import br.com.dbc.pautaapi.mapper.VotoMapper;
 import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.repository.UsuarioRepository;
 import br.com.dbc.pautaapi.repository.VotoRepository;
-import br.com.dbc.pautaapi.resource.VotoResource;
+import br.com.dbc.pautaapi.resource.v1.VotoResource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

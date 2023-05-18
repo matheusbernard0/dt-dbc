@@ -1,7 +1,6 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.SalvaVotoRequest;
-import br.com.dbc.pautaapi.dto.response.SalvaVotoResponse;
 import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.entity.Usuario;
 import br.com.dbc.pautaapi.entity.Voto;
@@ -31,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = VotoResource.class)
 public class VotoResourceTest {
+    private static final String VOTO_V1_BASE_PATH = "/voto/v1";
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -53,7 +53,7 @@ public class VotoResourceTest {
         SalvaVotoRequest request = Fixture.from(SalvaVotoRequest.class).gimme("VALID");
         when(pautaRepository.findByPautaId(any(Integer.class))).thenReturn(Optional.empty());
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isNotFound())
@@ -67,7 +67,7 @@ public class VotoResourceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("VALID");
         when(pautaRepository.findByPautaId(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -81,7 +81,7 @@ public class VotoResourceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("PAUTA_VOTADA");
         when(pautaRepository.findByPautaId(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -97,7 +97,7 @@ public class VotoResourceTest {
         when(pautaRepository.findByPautaId(any(Integer.class))).thenReturn(Optional.of(pauta));
         when(usuarioRepository.findById(any(Integer.class))).thenReturn(Optional.empty());
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isNotFound())
@@ -116,7 +116,7 @@ public class VotoResourceTest {
         when(usuarioRepository.findById(any(Integer.class))).thenReturn(Optional.of(usuario));
         when(votoRepository.findById(any(VotoId.class))).thenReturn(Optional.of(voto));
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -136,7 +136,7 @@ public class VotoResourceTest {
         when(votoRepository.findById(any(VotoId.class))).thenReturn(Optional.empty());
         when(votoRepository.save(any(Voto.class))).thenReturn(voto);
 
-        mvc.perform(post("/voto")
+        mvc.perform(post(VOTO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())

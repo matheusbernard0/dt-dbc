@@ -1,9 +1,9 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.request.CriaUsuarioRequest;
-import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.entity.Usuario;
 import br.com.dbc.pautaapi.repository.UsuarioRepository;
+import br.com.dbc.pautaapi.resource.v1.UsuarioResource;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = UsuarioResource.class)
 public class UsuarioResourceTest {
+    private static final String USUARIO_V1_BASE_PATH = "/usuario/v1";
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -48,7 +49,7 @@ public class UsuarioResourceTest {
 
         when(usuarioRepository.findUsuarioByCpf(anyString())).thenReturn(Optional.of(usuario));
 
-        mvc.perform(post("/usuario")
+        mvc.perform(post(USUARIO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -67,7 +68,7 @@ public class UsuarioResourceTest {
         when(usuarioRepository.findUsuarioByCpf(anyString())).thenReturn(Optional.empty());
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuario);
 
-        mvc.perform(post("/usuario")
+        mvc.perform(post(USUARIO_V1_BASE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
@@ -86,7 +87,7 @@ public class UsuarioResourceTest {
         List<Usuario> list = Fixture.from(Usuario.class).gimme(1,"VALID");
         when(usuarioRepository.findAll()).thenReturn(list);
 
-        mvc.perform(get("/usuario")
+        mvc.perform(get(USUARIO_V1_BASE_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))

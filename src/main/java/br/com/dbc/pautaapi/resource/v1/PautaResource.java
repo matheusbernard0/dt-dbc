@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.resource;
+package br.com.dbc.pautaapi.resource.v1;
 
 import br.com.dbc.pautaapi.dto.response.CriaPautaResponse;
 import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "Pauta", description = "Operacoes relativas a Pauta")
-@RequestMapping("/pauta")
+@RequestMapping("/pauta/v1")
 public interface PautaResource {
 
     @ApiOperation(value = "Busca todas as pautas")
