@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface VotoResource {
 
     @PostMapping
-    SalvaVotoResponse salvaVoto(@RequestBody SalvaVotoRequest salvaVotoRequest);
+    SalvaVotoResponse vote(@RequestBody SalvaVotoRequest salvaVotoRequest);
 }
