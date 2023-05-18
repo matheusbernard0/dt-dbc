@@ -47,6 +47,9 @@ After installed Postman, you can import [this collection](./Pauta%20API.postman_
 ---
 
 ## Future improvements:
+- Implement CPF validation.
+- Implement ErrorObject on response errors to turn easier error mapping on client applications.
+- Implement consumer outside this app to separate responsibilities.
 - Setup of Prometheus/Grafana to visualize app and business metrics; 
 - Setup of Grafana Loki to work with centralized Logs;
 - Setup of Jaeger to do the app tracing.
