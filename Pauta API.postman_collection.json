@@ -24,13 +24,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pauta",
+							"raw": "localhost:8080/pauta/v1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"pauta"
+								"pauta",
+								"v1"
 							]
 						}
 					},
@@ -54,13 +55,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pauta",
+							"raw": "localhost:8080/pauta/v1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"pauta"
+								"pauta",
+								"v1"
 							]
 						}
 					},
@@ -84,13 +86,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pauta/1",
+							"raw": "localhost:8080/pauta/v1/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"pauta",
+								"v1",
 								"1"
 							]
 						}
@@ -117,13 +120,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/sessao/inicia/2",
+							"raw": "localhost:8080/sessao/v1/inicia/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"sessao",
+								"v1",
 								"inicia",
 								"2"
 							]
@@ -151,13 +155,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/voto",
+							"raw": "localhost:8080/voto/v1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"voto"
+								"voto",
+								"v1"
 							]
 						}
 					},
@@ -183,13 +188,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuario",
+							"raw": "localhost:8080/usuario/v1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usuario"
+								"usuario",
+								"v1"
 							]
 						}
 					},
@@ -213,13 +219,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuario",
+							"raw": "localhost:8080/usuario/v1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usuario"
+								"usuario",
+								"v1"
 							]
 						}
 					},
