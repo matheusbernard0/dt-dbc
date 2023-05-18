@@ -22,12 +22,12 @@ public class Voto {
 
     private LocalDateTime data = LocalDateTime.now();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("sessaoId")
     @JoinColumn(name = "sessao_id")
     private Sessao sessao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("usuarioId")
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

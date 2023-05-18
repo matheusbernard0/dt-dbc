@@ -16,6 +16,6 @@ public class Pauta {
     private Integer id;
     private String descricao;
     @JsonIgnore
-    @OneToOne(mappedBy = "pauta")
+    @OneToOne(mappedBy = "pauta", fetch = FetchType.LAZY)
     private Sessao sessao;
 }

@@ -22,23 +22,14 @@ public class Sessao {
     private LocalDateTime fim;
     private Boolean aberta = Boolean.FALSE;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pauta_id")
     private Pauta pauta;
 
-    @OneToMany(mappedBy = "sessao")
+    @OneToMany(mappedBy = "sessao", fetch = FetchType.LAZY)
     private List<Voto> votos = new ArrayList<>();
 
     public boolean estaAbertaParaVotacao() {
         return aberta && LocalDateTime.now().isBefore(fim);
-    }
-
-    public void adicionaVoto(Usuario usuario, Opcao opcao) {
-        Voto voto = new Voto();
-        voto.setUsuario(usuario);
-        voto.setSessao(this);
-        voto.setOpcao(opcao);
-        this.votos.add(voto);
-        usuario.getVotos().add(voto);
     }
 }
