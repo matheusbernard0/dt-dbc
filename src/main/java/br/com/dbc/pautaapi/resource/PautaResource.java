@@ -33,5 +33,6 @@ public interface PautaResource {
     CriaPautaResponse create(@RequestBody CriaPautaRequest criaPautaRequest);
 
     @GetMapping("/{pautaId}")
+    @ResponseStatus(HttpStatus.OK)
     ResultadoPautaResponse getResult(@PathVariable("pautaId") Integer pautaId);
 }

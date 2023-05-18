@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.templates;
+package br.com.dbc.pautaapi.templates.request;
 
 import br.com.dbc.pautaapi.dto.request.CriaPautaRequest;
 import br.com.six2six.fixturefactory.Fixture;

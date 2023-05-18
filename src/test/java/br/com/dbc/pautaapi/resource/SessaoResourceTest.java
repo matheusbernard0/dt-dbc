@@ -7,7 +7,6 @@ import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.repository.SessaoRepository;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeAll;
@@ -48,7 +47,7 @@ public class SessaoResourceTest {
         CriaSessaoRequest request = Fixture.from(CriaSessaoRequest.class).gimme("VALID");
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.empty());
 
-        mvc.perform(patch("/sessao/open/1" )
+        mvc.perform(patch("/sessao/inicia/1" )
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isNotFound())
@@ -62,7 +61,7 @@ public class SessaoResourceTest {
         Pauta pauta = Fixture.from(Pauta.class).gimme("PAUTA_EM_VOTACAO");
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
 
-        mvc.perform(patch("/sessao/open/1" )
+        mvc.perform(patch("/sessao/inicia/1" )
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -79,7 +78,7 @@ public class SessaoResourceTest {
         when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
         when(sessaoRepository.save(any(Sessao.class))).thenReturn(sessao);
 
-        mvc.perform(patch("/sessao/open/1" )
+        mvc.perform(patch("/sessao/inicia/1" )
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())

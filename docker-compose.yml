@@ -1,20 +1,25 @@
 version: '3'
 services:
-#  pauta-api:
-#    container_name: desafio-pauta-api
-#    image: desafio-pauta:latest
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - kafka
-#    links:
-#      - kafka
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'pauta_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql-data:/var/lib/mysql
 
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
     networks:
-      - messages
+      - kafka_network
     ports:
       - "2181:2181"
 
@@ -22,7 +27,7 @@ services:
     image: wurstmeister/kafka
     container_name: kafka
     networks:
-      - messages
+      - kafka_network
     ports:
       - "9092:9092"
     environment:
@@ -30,5 +35,5 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
 networks:
-  messages:
-    name: messages
+  kafka_network:
+    driver: bridge

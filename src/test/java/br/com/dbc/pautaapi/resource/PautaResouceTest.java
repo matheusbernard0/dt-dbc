@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = PautaResource.class)
-public class PauteResouceTest {
+public class PautaResouceTest {
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean

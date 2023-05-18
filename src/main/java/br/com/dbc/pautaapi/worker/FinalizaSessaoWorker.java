@@ -1,10 +1,9 @@
 package br.com.dbc.pautaapi.worker;
 
 import br.com.dbc.pautaapi.dto.response.ResultadoPautaResponse;
-import br.com.dbc.pautaapi.entity.Opcao;
 import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.mapper.PautaMapper;
-import br.com.dbc.pautaapi.pubsub.ResultProducer;
+import br.com.dbc.pautaapi.pubsub.ResultadoProducer;
 import br.com.dbc.pautaapi.repository.PautaRepository;
 import br.com.dbc.pautaapi.repository.SessaoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,10 +17,10 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class FinalizadorDeSessao {
+public class FinalizaSessaoWorker {
     private final SessaoRepository sessaoRepository;
     private final PautaRepository pautaRepository;
-    private final ResultProducer resultProducer;
+    private final ResultadoProducer resultadoProducer;
     private final ObjectMapper objectMapper;
 
     @Scheduled(fixedRate = 5000)
@@ -33,7 +32,7 @@ public class FinalizadorDeSessao {
             sessaoRepository.save(pauta.getSessao());
             ResultadoPautaResponse resultadoPautaResponse = PautaMapper.INSTANCE
                     .pautoToResultadoPautaResponse(pauta, new ResultadoPautaResponse());
-            resultProducer.writeMessage(objectMapper.writeValueAsString(resultadoPautaResponse));
+            resultadoProducer.writeMessage(objectMapper.writeValueAsString(resultadoPautaResponse));
         }
     }
 

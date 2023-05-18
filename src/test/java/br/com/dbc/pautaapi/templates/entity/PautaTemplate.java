@@ -1,4 +1,4 @@
-package br.com.dbc.pautaapi.templates;
+package br.com.dbc.pautaapi.templates.entity;
 
 import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.entity.Sessao;
@@ -18,6 +18,12 @@ public class PautaTemplate implements TemplateLoader {
             add("id", 1);
             add("descricao", "criaPautaResponse description");
             add("sessao", one(Sessao.class, "ABERTO"));
+        }});
+
+        Fixture.of(Pauta.class).addTemplate("PAUTA_VOTADA", new Rule(){{
+            add("id", 1);
+            add("descricao", "criaPautaResponse description");
+            add("sessao", one(Sessao.class, "FECHADO"));
         }});
 
         Fixture.of(Pauta.class).addTemplate("PAUTA_COM_UM_VOTO_NAO", new Rule(){{

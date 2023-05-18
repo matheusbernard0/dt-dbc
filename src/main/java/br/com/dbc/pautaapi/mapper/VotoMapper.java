@@ -19,6 +19,6 @@ public interface VotoMapper {
     @AfterMapping
     default void atualizaVotoResponse(Voto voto, @MappingTarget SalvaVotoResponse salvaVotoResponse) {
         salvaVotoResponse.setPautaId(voto.getSessao().getPauta().getId());
-        salvaVotoResponse.setUserId(voto.getId().getUsuarioId());
+        salvaVotoResponse.setUserId(voto.getUsuario().getId());
     }
 }

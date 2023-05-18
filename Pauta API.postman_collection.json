@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "84755ccb-f7e8-40c9-854c-5738979f2000",
+		"name": "Pauta API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2850404"
+	},
+	"item": [
+		{
+			"name": "Pauta",
+			"item": [
+				{
+					"name": "Create Pauta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Pauta teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Pautas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Pauta teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca resultado da pauta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Pauta teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessao",
+			"item": [
+				{
+					"name": "Create Sessao",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"horas\": 1 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sessao/open/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sessao",
+								"open",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voto",
+			"item": [
+				{
+					"name": "Realiza voto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuarioId\": 1,\n    \"pautaId\": 1,\n    \"opcao\": \"SIM\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta/vote",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Cria usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"nome de teste\",\n    \"cpf\": \"14969735778\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pauta/cria/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pauta",
+								"cria",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

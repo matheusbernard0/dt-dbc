@@ -1,5 +1,6 @@
-package br.com.dbc.pautaapi.templates;
+package br.com.dbc.pautaapi.templates.entity;
 
+import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.entity.Sessao;
 import br.com.dbc.pautaapi.entity.Voto;
 import br.com.six2six.fixturefactory.Fixture;
@@ -11,11 +12,26 @@ import java.time.LocalDateTime;
 public class SessaoTemplate implements TemplateLoader {
     @Override
     public void load() {
+        Fixture.of(Sessao.class).addTemplate("VALID", new Rule(){{
+            add("id", 1);
+            add("inicio", LocalDateTime.now().minusDays(1));
+            add("fim", LocalDateTime.now().plusDays(1));
+            add("aberta", Boolean.TRUE);
+            add("pauta", one(Pauta.class, "VALID"));
+        }});
+
         Fixture.of(Sessao.class).addTemplate("ABERTO", new Rule(){{
             add("id", 1);
             add("inicio", LocalDateTime.now().minusDays(1));
             add("fim", LocalDateTime.now().plusDays(1));
             add("aberta", Boolean.TRUE);
+        }});
+
+        Fixture.of(Sessao.class).addTemplate("FECHADO", new Rule(){{
+            add("id", 1);
+            add("inicio", LocalDateTime.now().minusDays(1));
+            add("fim", LocalDateTime.now().minusDays(1));
+            add("aberta", Boolean.FALSE);
         }});
 
         Fixture.of(Sessao.class).addTemplate("COM_UM_VOTO_NAO", new Rule(){{

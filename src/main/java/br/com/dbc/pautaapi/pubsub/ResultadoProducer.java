@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class ResultProducer {
+public class ResultadoProducer {
 
     public final String TOPIC = "results";
     @Autowired
