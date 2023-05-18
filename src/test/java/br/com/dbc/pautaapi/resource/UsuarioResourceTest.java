@@ -1,6 +1,7 @@
 package br.com.dbc.pautaapi.resource;
 
 import br.com.dbc.pautaapi.dto.request.CriaUsuarioRequest;
+import br.com.dbc.pautaapi.entity.Pauta;
 import br.com.dbc.pautaapi.entity.Usuario;
 import br.com.dbc.pautaapi.repository.UsuarioRepository;
 import br.com.six2six.fixturefactory.Fixture;
@@ -15,10 +16,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,5 +78,22 @@ public class UsuarioResourceTest {
 
         verify(usuarioRepository, times(1)).findUsuarioByCpf(request.getCpf());
         verify(usuarioRepository, times(1)).save(any(Usuario.class));
+    }
+
+    @Test
+    @SneakyThrows
+    public void findAllMustReturnUsers() {
+        List<Usuario> list = Fixture.from(Usuario.class).gimme(1,"VALID");
+        when(usuarioRepository.findAll()).thenReturn(list);
+
+        mvc.perform(get("/usuario")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$.[0].id").value(1))
+                .andExpect(jsonPath("$.[0].cpf").value("00000000000"))
+                .andExpect(jsonPath("$.[0].nome").value("Nome do usuario"));
+
+        verify(usuarioRepository, times(1)).findAll();
     }
 }

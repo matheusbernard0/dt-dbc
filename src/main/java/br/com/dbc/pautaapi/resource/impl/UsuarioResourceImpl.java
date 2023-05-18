@@ -11,6 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -26,5 +30,16 @@ public class UsuarioResourceImpl implements UsuarioResource {
         Usuario usuario = usuarioRepository.save(UsuarioMapper.INSTANCE.criaUsuarioRequestToUsuario(criaUsuarioRequest));
         log.info("finalizando UsuarioResource.createUser");
         return UsuarioMapper.INSTANCE.usuarioToCriaUsuarioResponse(usuario);
+    }
+
+    @Override
+    public List<CriaUsuarioResponse> findAll() {
+        log.info("iniciando UsuarioResource.findAll");
+        List<CriaUsuarioResponse> list = usuarioRepository.findAll()
+                .stream()
+                .map(UsuarioMapper.INSTANCE::usuarioToCriaUsuarioResponse)
+                .collect(toList());
+        log.info("finalizando UsuarioResource.findAll");
+        return list;
     }
 }

@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "Usuario", description = "Operacoes relativas a Usuario")
 @RequestMapping("/usuario")
 public interface UsuarioResource {
@@ -21,4 +23,11 @@ public interface UsuarioResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     CriaUsuarioResponse createUser(@RequestBody CriaUsuarioRequest criaUsuarioRequest);
+
+    @ApiOperation(value = "Busca todos os usuarios")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "usuarios retornados com sucesso")
+    })
+    @GetMapping
+    List<CriaUsuarioResponse> findAll();
 }
