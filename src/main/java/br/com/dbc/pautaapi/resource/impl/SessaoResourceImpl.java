@@ -24,6 +24,11 @@ public class SessaoResourceImpl implements SessaoResource {
 
     @Override
     public CriaSessaoResponse openSession(CriaSessaoRequest criaSessaoRequest, Integer pautaId) {
+        if (Objects.isNull(criaSessaoRequest))
+            criaSessaoRequest = CriaSessaoRequest.builder()
+                    .minutos(1)
+                    .build();
+
         log.info("iniciando SessaoResource.openSession");
         Pauta pauta = pautaRepository.findById(pautaId)
                 .orElseThrow(() -> new PautaNaoEncontradaException("pauta nao encontrada"));

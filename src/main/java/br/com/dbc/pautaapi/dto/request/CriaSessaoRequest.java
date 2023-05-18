@@ -1,12 +1,14 @@
 package br.com.dbc.pautaapi.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Min;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CriaSessaoRequest {
     @Min(value = 0, message = "horas deve ser um numero natural")
     private int horas;

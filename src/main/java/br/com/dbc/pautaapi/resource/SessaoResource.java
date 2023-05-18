@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Api(tags = "Sessao", description = "Operacoes relativas a Sessao")
 @RequestMapping("/sessao")
 public interface SessaoResource {
@@ -21,5 +23,5 @@ public interface SessaoResource {
     })
     @PatchMapping("/inicia/{pautaId}")
     @ResponseStatus(HttpStatus.OK)
-    CriaSessaoResponse openSession(@RequestBody(required = false) CriaSessaoRequest criaSessaoRequest, @PathVariable Integer pautaId);
+    CriaSessaoResponse openSession(@RequestBody(required = false) @Valid CriaSessaoRequest criaSessaoRequest, @PathVariable Integer pautaId);
 }

@@ -85,4 +85,21 @@ public class SessaoResourceTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.aberta").value(true));
     }
+
+    @Test
+    @SneakyThrows
+    public void mustCreateSessionWithDefaultTime() {
+        CriaSessaoRequest request = Fixture.from(CriaSessaoRequest.class).gimme("VALID");
+        Pauta pauta = Fixture.from(Pauta.class).gimme("VALID");
+        Sessao sessao = Fixture.from(Sessao.class).gimme("ABERTO");
+
+        when(pautaRepository.findById(any(Integer.class))).thenReturn(Optional.of(pauta));
+        when(sessaoRepository.save(any(Sessao.class))).thenReturn(sessao);
+
+        mvc.perform(patch("/sessao/inicia/1" )
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.aberta").value(true));
+    }
 }
